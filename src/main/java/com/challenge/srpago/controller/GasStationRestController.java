@@ -3,7 +3,6 @@ package com.challenge.srpago.controller;
 import com.challenge.srpago.action.InfoRQ;
 import com.challenge.srpago.action.Response;
 import com.challenge.srpago.data.dao.GasStationDao;
-import com.challenge.srpago.data.dao.repository.GasStationRepository;
 import com.challenge.srpago.data.entity.BankPaymentCard;
 import com.challenge.srpago.data.entity.CardHolder;
 import com.challenge.srpago.data.entity.GasSell;
@@ -45,6 +44,13 @@ public class GasStationRestController {
      */
     @PostMapping(value = "/buy-gas-service")
     public Response buyGasService(@Valid @RequestBody InfoRQ infoRQ) {
+        Response response = new Response();
+        if(infoRQ==null){
+            response.setError("Bad parameter");
+            response.setMessage("The service should contain an entry body");
+            response.setSuccess(Boolean.FALSE);
+            return response;
+        }
         Optional<GasStationTo> optional = gasStationDao.getGasStationById(infoRQ.getGasStation());
         GasStationTo gasStationTo = optional.get();
 
@@ -52,7 +58,6 @@ public class GasStationRestController {
         Optional<CardHolder> optionalCardHolder = computeCardHolderInfo(infoRQ);
         Optional<BankPaymentCard> optionalBankPaymentCard = computeBankPaymentCard(infoRQ);
 
-        Response response = new Response();
         Optional<GasSell> optionalGasSell = Optional.empty();
         if(optionalGasStation.isPresent() && optionalCardHolder.isPresent() && optionalBankPaymentCard.isPresent()){
             optionalGasSell = computeGasSell(optionalCardHolder.get().getId()

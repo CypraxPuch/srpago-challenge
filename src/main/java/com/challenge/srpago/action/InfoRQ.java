@@ -1,8 +1,8 @@
 package com.challenge.srpago.action;
 
-import javax.validation.constraints.DecimalMin;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+import org.hibernate.validator.constraints.Range;
+
+import javax.validation.constraints.*;
 
 /**
  * Created by IntelliJ IDEA.<br/>
@@ -13,7 +13,6 @@ import javax.validation.constraints.NotNull;
  */
 public class InfoRQ {
 
-
     @NotEmpty(message = "Please provide email.")
     private String email;
     @NotEmpty(message = "Please provide name.")
@@ -21,17 +20,21 @@ public class InfoRQ {
     @NotEmpty(message = "Please provide last name.")
     private String lastName;
     @NotEmpty(message = "Please provide card number.")
+    @Size(min = 16, max = 18,message = "Card number must be between 16 and 18 digits")
     private String cardNumber;
     @NotNull(message = "Please provide expiration date year.")
+    @Min(value = 2019, message = "Expiration date year must be equals or greater than 2019")
     private String expirationDateYear;
     @NotEmpty(message = "Please provide expiration date month.")
+    @Min(value = 10, message = "Expiration date month must be equals or greater than 10")
     private String expirationDateMonth;
     @NotNull(message = "Please provide the gas type.")
+    @Range(min=1, max = 2, message = "Gas type only can be 1 = Magna, 2 = Premium")
     private Integer gasType;
     @NotNull(message = "Please provide amount.")
-    @DecimalMin(value = "1.00", message = "Must be greater than or equal to $1.00")
+    @DecimalMin(value = "1.00", message = "Amount must be greater than or equal to $1.00")
     private Double amount;
-    @NotEmpty(message = "Please provide the gas station.")
+    @NotEmpty(message = "Please provide the gas station id.")
     private String gasStation;
     @NotEmpty(message = "Please provide a seller name.")
     private String sellerName;
