@@ -1,9 +1,6 @@
 package com.challenge.srpago.data.to;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-
-import java.math.BigDecimal;
 
 /**
  * Created by IntelliJ IDEA.<br/>
@@ -12,7 +9,6 @@ import java.math.BigDecimal;
  * Time: 9:05 PM<br/>
  * Generated to
  */
-@JsonIgnoreProperties(ignoreUnknown = true)
 public class GasStationTo {
 
     @JsonProperty("_id")
@@ -26,7 +22,9 @@ public class GasStationTo {
     private String colonia;
     @JsonProperty("numeropermiso")
     private String numeroPermiso;
-    private String permisoId;
+    private String permisoid;
+    @JsonProperty("fechaaplicacion")
+    private String fechaAplicacion;
     private String longitude;
     private String latitude;
     @JsonProperty("premium")
@@ -94,12 +92,20 @@ public class GasStationTo {
         this.numeroPermiso = numeroPermiso;
     }
 
-    public String getPermisoId() {
-        return permisoId;
+    public String getFechaAplicacion() {
+        return fechaAplicacion;
     }
 
-    public void setPermisoId(String permisoId) {
-        this.permisoId = permisoId;
+    public void setFechaAplicacion(String fechaAplicacion) {
+        this.fechaAplicacion = fechaAplicacion;
+    }
+
+    public String getPermisoid() {
+        return permisoid;
+    }
+
+    public void setPermisoid(String permisoid) {
+        this.permisoid = permisoid;
     }
 
     public String getLongitude() {
@@ -160,7 +166,7 @@ public class GasStationTo {
                 ", regularPrice='" + regularPrice + '\'' +
                 ", colonia='" + colonia + '\'' +
                 ", numeroPermiso='" + numeroPermiso + '\'' +
-                ", permisoId='" + permisoId + '\'' +
+                ", permisoId='" + permisoid + '\'' +
                 ", longitude='" + longitude + '\'' +
                 ", latitude='" + latitude + '\'' +
                 ", premiumPrice='" + premiumPrice + '\'' +

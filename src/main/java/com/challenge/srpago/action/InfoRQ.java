@@ -23,7 +23,7 @@ public class InfoRQ {
     @NotEmpty(message = "Please provide card number.")
     private String cardNumber;
     @NotNull(message = "Please provide expiration date year.")
-    private Integer expirationDateYear;
+    private String expirationDateYear;
     @NotEmpty(message = "Please provide expiration date month.")
     private String expirationDateMonth;
     @NotNull(message = "Please provide the gas type.")
@@ -68,11 +68,11 @@ public class InfoRQ {
         this.cardNumber = cardNumber;
     }
 
-    public Integer getExpirationDateYear() {
+    public String getExpirationDateYear() {
         return expirationDateYear;
     }
 
-    public void setExpirationDateYear(Integer expirationDateYear) {
+    public void setExpirationDateYear(String expirationDateYear) {
         this.expirationDateYear = expirationDateYear;
     }
 
