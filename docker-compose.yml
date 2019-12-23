@@ -1,0 +1,18 @@
+version: '3.3'
+services:
+  db:
+    container_name: srpago-db-container
+    image: mysql:8
+    ports:
+      - 32101:3306
+    entrypoint:
+      - MYSQL_DATABASE=srpagodb
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=blitz
+      - MYSQL_ROOT_PASSWORD=supersecret
+  web:
+    container_name: srpago-dockerized-container
+    image: srpago-dockerized
+    ports:
+      - 8080:8080
+

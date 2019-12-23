@@ -24,7 +24,7 @@
 1. Create a `db schema` named as: `srpagodb`
 2. Run the script that you can find inside the project in directory:
     
-    `/<any-directory>/srpago/src/main/resources/initial-script.sql`  
+    `/<any-directory>/srpago/src/main/resources/V1__create_initial_schema.sql`  
 #####Note: If for any reason you've changed the `db schema name` then you should change the parameter in the configuration file:
 
     ######application.properties
