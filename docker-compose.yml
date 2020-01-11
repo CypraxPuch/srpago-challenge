@@ -1,0 +1,36 @@
+version: '3.3'
+services:
+  db:
+    container_name: srpago-db-container
+    image: mysql:8
+    environment:
+      - MYSQL_DATABASE=srpagodb
+      - MYSQL_USER=gpucheta
+      - MYSQL_PASSWORD=123456
+      - MYSQL_ROOT_PASSWORD=blitz
+    ports:
+      - 32101:3306
+    networks:
+      - srpagonet
+  flyway:
+    container_name: srpago-flyway-containers
+    image: flyway/flyway
+    command: -url=jdbc:mysql://srpago-db-container:3306/srpagodb -schemas=srpagodb -user=root -password=blitz -connectRetries=60 migrate
+    volumes:
+      - C:\opt\ledze\srpago-challenge-scripts:/flyway/sql
+    depends_on:
+      - db
+    networks:
+      - srpagonet
+  webapp:
+    container_name: srpago-webapp-container
+    image: srpago-webapp
+    ports:
+      - 8080:8080
+    networks:
+      - srpagonet
+    depends_on:
+      - db
+networks:
+  srpagonet:
+    driver: bridge
