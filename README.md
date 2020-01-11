@@ -17,31 +17,34 @@
     then the `war file` will be located in: `/<any-directory>/srpago/target/`
     
     The `war file name` is: `srpago-0.0.1-SNAPSHOT.war`   
-####Important: You can deploy the `war file` in any Application Server
+####Important: You can deploy the `war file` in any Application Server but in this case we're gonna build and run in just a few steps.
 
 ###Database 
 
-1. Create a `db schema` named as: `srpagodb`
-2. Run the script that you can find inside the project in directory:
+1. The DB are going to be created with an initial script within a docker container and the schema will be named: `srpagodb`
+2. Copy the script, that you can find inside the project in directory:
     
-    `/<any-directory>/srpago/src/main/resources/V1__create_initial_schema.sql`  
-#####Note: If for any reason you've changed the `db schema name` then you should change the parameter in the configuration file:
-
-    ######application.properties
-    In this file  you can find all the DB configuration like: user, password and the url
-
-    spring.datasource.url= jdbc:mysql://localhost:3306/srpagodb?useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC 
+    `/<any-directory>/srpago/src/main/resources/dbscripts/V1__create_initial_schema.sql`
     
+    and paste it in any local directory, for example:
+    
+    `/opt/ledze/srpago-challenge-scripts/`  
+
+###Build & Run
+Open up 1 command line terminal:
+1. Execute command `docker build -f Dockerfile -t srpago-webapp .`
+2. Execute command `docker-compose -f docker-compose.yml up` 
+
 
 #Test the endpoint
 
 1. Once the `war file` was deployed then a RESTfull endpoint will be exposed:
 
-    `/buy-gas-service`
+    `http://localhost:8080/srpago-0.0.1-SNAPSHOT/buy-gas-service`
 
 ####To test the endpoint should be a POST Example
 
-`curl -X POST localhost:8080/buy-gas-service -H 'Content-type:application/json' -d '{"email": "pucheta@srpago.com", "name": "Gerardo", "lastName": "Pucheta Figueroa", "cardNumber": "9877654432114561", "expirationDateYear": "2010", "expirationDateMonth": "8", "gasType": "2", "amount": "200.00", "gasStation": "587fbd68edfe99480a072f81", "sellerName": "Cristina"}'`
+`curl -X POST localhost:8080/srpago-0.0.1-SNAPSHOT/buy-gas-service -H 'Content-type:application/json' -d '{"email": "pucheta@srpago.com", "name": "Gerardo", "lastName": "Pucheta Figueroa", "cardNumber": "9877654432114561", "expirationDateYear": "2010", "expirationDateMonth": "8", "gasType": "2", "amount": "200.00", "gasStation": "587fbd68edfe99480a072f81", "sellerName": "Cristina"}'`
 
 ####Success execution
 
